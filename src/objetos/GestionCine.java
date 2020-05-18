@@ -4,6 +4,7 @@ import java.sql.*;
 
 public class GestionCine {
 
+    //constructor vacio
     public GestionCine() {
     }
 
@@ -92,6 +93,56 @@ public class GestionCine {
 
     }
 
+    //metodo para ver todas las peliculas guardadas
+    public String listadoPeliculas() {
+
+        // creamos el string que almacena el listado de peliculas
+        String listaPeliculas = "";
+
+        try {
+
+            // Conectamos con la base de datos cine
+            Connection miConexion
+                    = DriverManager.getConnection("jdbc:mysql://localhost:3306/cine",
+                            "root", "");
+
+            PreparedStatement sentencia
+                    = miConexion.prepareStatement("SELECT * FROM cartelera");
+            ResultSet resultado = sentencia.executeQuery();
+
+            listaPeliculas += "Listado de peliculas disponibles:\n";
+
+            while (resultado.next()) {
+                //se realiza una segunda consulta para ver el aforo de la sala
+                PreparedStatement sentencia2
+                        = miConexion.prepareStatement("SELECT aforo FROM salas WHERE idSala = ?");
+
+                sentencia.setInt(1, resultado.getInt("idSala"));
+
+                ResultSet resultado2 = sentencia2.executeQuery();
+
+                listaPeliculas += "*********************************** \n";
+                listaPeliculas += "Titulo: " + resultado.getString("nombre") + "\n";
+                listaPeliculas += "Genero: " + resultado.getString("genero") + "\n";
+                listaPeliculas += "Entradas Vendidas: " + resultado.getInt("entradasVendidas") + "\n";
+                listaPeliculas += "Entradas Totales: " + resultado2 + "\n";
+                listaPeliculas += "Precio: " + resultado.getDouble("precio") + "\n";
+                listaPeliculas += "Hora: " + resultado.getTime("Hora") + "\n";
+                listaPeliculas += "Sinopsis: " + resultado.getString("sinopsis") + "\n";
+
+            }
+
+            // Desconectamos de la base de datos cine
+            miConexion.close();
+
+        } catch (SQLException er) {
+            System.out.println(er.getMessage());
+        }
+        
+        return listaPeliculas;
+
+    }
+
     public void compraEntrada(int idPelicula, int numEntradas) {
         try {
             int entradasCompradas = 0;
@@ -131,4 +182,120 @@ public class GestionCine {
         }
     }
 
+    //metodo para añadir salas a la tabla salas
+    public void anadeSala(int idSala, int aforo, boolean tridimension, boolean dolbyAtmos) {
+        try {
+            // Conectamos con la base de datos cine
+            Connection miConexion
+                    = DriverManager.getConnection("jdbc:mysql://localhost:3306/cine",
+                            "root", "");
+
+            PreparedStatement sentencia
+                    = miConexion.prepareStatement("INSERT INTO salas VALUES(?, ?, ?, ?)");
+
+            sentencia.setInt(1, idSala);
+            sentencia.setInt(2, aforo);
+            sentencia.setBoolean(3, tridimension);
+            sentencia.setBoolean(4, dolbyAtmos);
+
+            sentencia.executeUpdate();
+
+            // Desconectamos de la base de datos cine
+            miConexion.close();
+
+        } catch (SQLException er) {
+            System.out.println(er.getMessage());
+        }
+    }
+
+    //borra una sala de la lista, para ello no debera proyectarse ninguna pelicula en ella
+    public void borraSala(int idSala) {
+        try {
+            // Conectamos con la base de datos cine
+            Connection miConexion
+                    = DriverManager.getConnection("jdbc:mysql://localhost:3306/cine",
+                            "root", "");
+
+            PreparedStatement sentencia
+                    = miConexion.prepareStatement("DELETE FROM salas WHERE idSala = ?");
+
+            sentencia.setInt(1, idSala);
+
+            sentencia.executeUpdate();
+
+            // Desconectamos de la base de datos cine
+            miConexion.close();
+
+        } catch (SQLException er) {
+            System.out.println(er.getMessage());
+        }
+    }
+
+    //metodo para modificar una sala
+    public void modificaSala(int idSala, int aforo, boolean tridimension, boolean dolbyAtmos) {
+        try {
+            // Conectamos con la base de datos cine
+            Connection miConexion
+                    = DriverManager.getConnection("jdbc:mysql://localhost:3306/cine",
+                            "root", "");
+
+            PreparedStatement sentencia
+                    = miConexion.prepareStatement("UPDATE salas SET aforo = ?,"
+                            + " 3d = ?, dolbyAtmos = ? WHERE idSala = ? ");
+
+            sentencia.setInt(1, aforo);
+            sentencia.setBoolean(2, tridimension);
+            sentencia.setBoolean(3, dolbyAtmos);
+            sentencia.setInt(4, idSala);
+
+            sentencia.executeUpdate();
+
+            // Desconectamos de la base de datos cine
+            miConexion.close();
+
+        } catch (SQLException er) {
+            System.out.println(er.getMessage());
+        }
+
+    }
+
+    //metodo para ver todas las salas guardadas
+    public String listadoSalas() {
+
+        // creamos el string que almacena el listado de salas
+        String listaSalas = "";
+
+        try {
+
+            // Conectamos con la base de datos cine
+            Connection miConexion
+                    = DriverManager.getConnection("jdbc:mysql://localhost:3306/cine",
+                            "root", "");
+
+            PreparedStatement sentencia
+                    = miConexion.prepareStatement("SELECT * FROM salas");
+            ResultSet resultado = sentencia.executeQuery();
+
+            listaSalas += "Listado de salas disponibles:\n";
+
+            while (resultado.next()) {
+
+                listaSalas += "*********************************** \n";
+                listaSalas += "Sala numero: " + resultado.getString("idSala") + "\n";
+                listaSalas += "Aforo: " + resultado.getString("aforo") + "\n";
+                listaSalas += "3D: " + resultado.getBoolean("3d") + "\n";
+                listaSalas += "Dolby Atmos: " + resultado.getBoolean("dolbyAtmos") + "\n";
+
+            }
+
+            // Desconectamos de la base de datos cine
+            miConexion.close();
+
+        } catch (SQLException er) {
+            System.out.println(er.getMessage());
+        }
+
+        return listaSalas;
+
+    }
 }
