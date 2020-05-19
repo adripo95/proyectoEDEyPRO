@@ -111,22 +111,25 @@ public class GestionCine {
             ResultSet resultado = sentencia.executeQuery();
 
             listaPeliculas += "Listado de peliculas disponibles:\n";
+            
+            ResultSet resultado2;
 
             while (resultado.next()) {
                 //se realiza una segunda consulta para ver el aforo de la sala
                 PreparedStatement sentencia2
-                        = miConexion.prepareStatement("SELECT aforo FROM salas WHERE idSala = ?");
+                        = miConexion.prepareStatement("SELECT * FROM salas WHERE idSala = ?");
 
-                sentencia.setInt(1, resultado.getInt("idSala"));
+                sentencia2.setInt(1, resultado.getInt("idSala"));
 
-                ResultSet resultado2 = sentencia2.executeQuery();
+                resultado2 = sentencia2.executeQuery();
+                resultado2.next();
 
                 listaPeliculas += "*********************************** \n";
                 listaPeliculas += "Titulo: " + resultado.getString("nombre") + "\n";
                 listaPeliculas += "Genero: " + resultado.getString("genero") + "\n";
                 listaPeliculas += "Entradas Vendidas: " + resultado.getInt("entradasVendidas") + "\n";
-                listaPeliculas += "Entradas Totales: " + resultado2 + "\n";
-                listaPeliculas += "Precio: " + resultado.getDouble("precio") + "\n";
+                listaPeliculas += "Entradas Totales: " + resultado2.getInt(2) + "\n";
+                listaPeliculas += "Precio: " + resultado.getDouble("precio") + " euros\n";
                 listaPeliculas += "Hora: " + resultado.getTime("Hora") + "\n";
                 listaPeliculas += "Sinopsis: " + resultado.getString("sinopsis") + "\n";
 
