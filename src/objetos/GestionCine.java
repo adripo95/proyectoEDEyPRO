@@ -111,7 +111,7 @@ public class GestionCine {
             ResultSet resultado = sentencia.executeQuery();
 
             listaPeliculas += "Listado de peliculas disponibles:\n";
-            
+
             ResultSet resultado2;
 
             while (resultado.next()) {
@@ -141,7 +141,7 @@ public class GestionCine {
         } catch (SQLException er) {
             System.out.println(er.getMessage());
         }
-        
+
         return listaPeliculas;
 
     }
@@ -284,8 +284,8 @@ public class GestionCine {
             while (resultado.next()) {
 
                 listaSalas += "*********************************** \n";
-                listaSalas += "Sala numero: " + resultado.getString("idSala") + "\n";
-                listaSalas += "Aforo: " + resultado.getString("aforo") + "\n";
+                listaSalas += "Sala numero: " + resultado.getInt("idSala") + "\n";
+                listaSalas += "Aforo: " + resultado.getInt("aforo") + "\n";
                 listaSalas += "3D: " + resultado.getBoolean("3d") + "\n";
                 listaSalas += "Dolby Atmos: " + resultado.getBoolean("dolbyAtmos") + "\n";
 
@@ -299,6 +299,123 @@ public class GestionCine {
         }
 
         return listaSalas;
+
+    }
+
+    //metodo para añadir salas a la tabla cafeteria
+    public void anadeBar(int idProducto, String nombre, int stock, double precio) {
+        try {
+            // Conectamos con la base de datos cine
+            Connection miConexion
+                    = DriverManager.getConnection("jdbc:mysql://localhost:3306/cine",
+                            "root", "");
+
+            PreparedStatement sentencia
+                    = miConexion.prepareStatement("INSERT INTO cafeteria VALUES(?, ?, ?, ?)");
+
+            sentencia.setInt(1, idProducto);
+            sentencia.setString(2, nombre);
+            sentencia.setInt(3, stock);
+            sentencia.setDouble(4, precio);
+
+            sentencia.executeUpdate();
+
+            // Desconectamos de la base de datos cine
+            miConexion.close();
+
+        } catch (SQLException er) {
+            System.out.println(er.getMessage());
+        }
+    }
+
+    //borra un item de la cafeteria
+    public void borraBar(int idProducto) {
+        try {
+            // Conectamos con la base de datos cine
+            Connection miConexion
+                    = DriverManager.getConnection("jdbc:mysql://localhost:3306/cine",
+                            "root", "");
+
+            PreparedStatement sentencia
+                    = miConexion.prepareStatement("DELETE FROM cafeteria WHERE idProducto = ?");
+
+            sentencia.setInt(1, idProducto);
+
+            sentencia.executeUpdate();
+
+            // Desconectamos de la base de datos cine
+            miConexion.close();
+
+        } catch (SQLException er) {
+            System.out.println(er.getMessage());
+        }
+    }
+
+    //metodo para modificar un producto de la cafeteria
+    public void modificaBar(int idProducto, String nombre, int stock, double precio) {
+        try {
+            // Conectamos con la base de datos cine
+            Connection miConexion
+                    = DriverManager.getConnection("jdbc:mysql://localhost:3306/cine",
+                            "root", "");
+
+            PreparedStatement sentencia
+                    = miConexion.prepareStatement("UPDATE cafeteria SET nombre = ?,"
+                            + " stock = ?, precio = ? WHERE iProducto = ? ");
+
+            sentencia.setString(1, nombre);
+            sentencia.setInt(2, stock);
+            sentencia.setDouble(3, precio);
+            sentencia.setInt(4, idProducto);
+
+            sentencia.executeUpdate();
+
+            // Desconectamos de la base de datos cine
+            miConexion.close();
+
+        } catch (SQLException er) {
+            System.out.println(er.getMessage());
+        }
+
+    }
+    
+    //metodo para ver todas las salas guardadas
+    public String listadoBar() {
+
+        // creamos el string que almacena el listado de salas
+        String listaCafeteria = "";
+
+        try {
+
+            // Conectamos con la base de datos cine
+            Connection miConexion
+                    = DriverManager.getConnection("jdbc:mysql://localhost:3306/cine",
+                            "root", "");
+
+            PreparedStatement sentencia
+                    = miConexion.prepareStatement("SELECT * FROM cafeteria");
+            ResultSet resultado = sentencia.executeQuery();
+
+            listaCafeteria += "Listado de productos disponibles:\n";
+
+            while (resultado.next()) {
+
+                listaCafeteria += "*********************************** \n";
+                listaCafeteria += "Producto numero: " + resultado.getInt("idProducto") + "\n";
+                listaCafeteria += "Nombre: " + resultado.getString("nombre") + "\n";
+                listaCafeteria += "Stock: " + resultado.getInt("stock") + "\n";
+                listaCafeteria += "Precio: " + resultado.getDouble("precio") + " euros\n";
+
+            }
+
+            // Desconectamos de la base de datos cine
+            miConexion.close();
+
+        } catch (SQLException er) {
+            System.out.println(er.getMessage());
+        }
+
+        return listaCafeteria;
 
     }
 }

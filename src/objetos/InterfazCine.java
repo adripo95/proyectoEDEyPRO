@@ -34,6 +34,17 @@ public class InterfazCine extends JFrame implements ActionListener {
     JButton carteleraAtualizaListaB;
     JButton carteleraSalirB;
     JTextArea carteleraListaArea;
+    
+    //componentes del frame de gestion de salas
+    JFrame frameSalas;
+    JPanel panelSalas;
+    JScrollPane panelScrollSalas;
+    JButton salasAnadeB;
+    JButton salasEliminaB;
+    JButton salasModificaB;
+    JButton salasAtualizaListaB;
+    JButton salasSalirB;
+    JTextArea salasListaArea;
 
     //contructor de la interfaz
     public InterfazCine() {
@@ -128,6 +139,43 @@ public class InterfazCine extends JFrame implements ActionListener {
         carteleraSalirB.setBounds(30, 310, 140, 30);
         panelCartelera.add(carteleraSalirB);
         
+        //setup frame salas
+        frameSalas = new JFrame("Gestion Salas");
+        frameSalas.setSize(500, 400);
+        frameSalas.setResizable(false);
+        frameSalas.setLocationRelativeTo(null);
+        frameSalas.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        panelSalas = new JPanel();
+        panelSalas.setLayout(null);
+        
+        //componentes frame salas
+        salasListaArea = new JTextArea();
+        panelScrollSalas = new JScrollPane(salasListaArea);
+        panelScrollSalas.setBounds(200, 30, 270, 325);
+        salasListaArea.setBounds(200, 30, 270, 325);
+        panelSalas.add(panelScrollSalas);
+        
+        //botones frame salas
+        salasAnadeB = new JButton("Añadir Sala");
+        salasAnadeB.setBounds(30, 30, 140, 30);
+        panelSalas.add(salasAnadeB);
+        
+        salasEliminaB = new JButton("Elimina Sala");
+        salasEliminaB.setBounds(30, 100, 140, 30);
+        panelSalas.add(salasEliminaB);
+        
+        salasModificaB = new JButton("Modifica Sala");
+        salasModificaB.setBounds(30, 170, 140, 30);
+        panelSalas.add(salasModificaB);
+        
+        salasAtualizaListaB = new JButton("Actualiza Listado");
+        salasAtualizaListaB.setBounds(30, 240, 140, 30);
+        panelSalas.add(salasAtualizaListaB);
+        
+        salasSalirB = new JButton("Salir");
+        salasSalirB.setBounds(30, 310, 140, 30);
+        panelSalas.add(salasSalirB);
+        
         
         //botones a la escucha
         gestionPrinciB.addActionListener(this);
@@ -142,11 +190,17 @@ public class InterfazCine extends JFrame implements ActionListener {
         carteleraModificaB.addActionListener(this);
         carteleraAtualizaListaB.addActionListener(this);
         carteleraSalirB.addActionListener(this);
+        salasAnadeB.addActionListener(this);
+        salasEliminaB.addActionListener(this);
+        salasModificaB.addActionListener(this);
+        salasAtualizaListaB.addActionListener(this);
+        salasSalirB.addActionListener(this);
         
         //añadimos paneles a los frames
         this.add(panelPrinci);
         frameGestion.add(panelGestion);
         frameCartelera.add(panelCartelera);
+        frameSalas.add(panelSalas);
         
     }
 
@@ -163,6 +217,9 @@ public class InterfazCine extends JFrame implements ActionListener {
         if (e.getSource() == carteleraSalirB) {
             frameCartelera.dispose();
         }
+        if (e.getSource() == salasSalirB) {
+            frameSalas.dispose();
+        }
         
         //if para hacer visibles los frames
         if (e.getSource() == gestionPrinciB) {
@@ -173,9 +230,17 @@ public class InterfazCine extends JFrame implements ActionListener {
             frameCartelera.setVisible(true);
             carteleraListaArea.setText(gestor.listadoPeliculas());
         }
+        if (e.getSource() == gestionSalaB) {
+            frameSalas.setVisible(true);
+            salasListaArea.setText(gestor.listadoSalas());
+        }
         
+        //metodos
         if (e.getSource() == carteleraAtualizaListaB) {
             carteleraListaArea.setText(gestor.listadoPeliculas());
+        }
+        if (e.getSource() == salasAtualizaListaB) {
+            salasListaArea.setText(gestor.listadoSalas());
         }
     }
 }
