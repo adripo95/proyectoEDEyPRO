@@ -45,6 +45,17 @@ public class InterfazCine extends JFrame implements ActionListener {
     JButton salasAtualizaListaB;
     JButton salasSalirB;
     JTextArea salasListaArea;
+    
+    //componentes del frame de gestion de la cafeteria
+    JFrame frameBar;
+    JPanel panelBar;
+    JScrollPane panelScrollBar;
+    JButton barAnadeB;
+    JButton barEliminaB;
+    JButton barModificaB;
+    JButton barAtualizaListaB;
+    JButton barSalirB;
+    JTextArea barListaArea;
 
     //contructor de la interfaz
     public InterfazCine() {
@@ -176,6 +187,43 @@ public class InterfazCine extends JFrame implements ActionListener {
         salasSalirB.setBounds(30, 310, 140, 30);
         panelSalas.add(salasSalirB);
         
+        //setup frame bar
+        frameBar = new JFrame("Gestion Cafeteria");
+        frameBar.setSize(500, 400);
+        frameBar.setResizable(false);
+        frameBar.setLocationRelativeTo(null);
+        frameBar.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        panelBar = new JPanel();
+        panelBar.setLayout(null);
+        
+        //componentes frame bar
+        barListaArea = new JTextArea();
+        panelScrollBar = new JScrollPane(barListaArea);
+        panelScrollBar.setBounds(200, 30, 270, 325);
+        barListaArea.setBounds(200, 30, 270, 325);
+        panelBar.add(panelScrollBar);
+        
+        //botones frame bar
+        barAnadeB = new JButton("Añadir a bar");
+        barAnadeB.setBounds(30, 30, 140, 30);
+        panelBar.add(barAnadeB);
+        
+        barEliminaB = new JButton("Elimina de bar");
+        barEliminaB.setBounds(30, 100, 140, 30);
+        panelBar.add(barEliminaB);
+        
+        barModificaB = new JButton("Modifica producto");
+        barModificaB.setBounds(30, 170, 140, 30);
+        panelBar.add(barModificaB);
+        
+        barAtualizaListaB = new JButton("Actualiza Listado");
+        barAtualizaListaB.setBounds(30, 240, 140, 30);
+        panelBar.add(barAtualizaListaB);
+        
+        barSalirB = new JButton("Salir");
+        barSalirB.setBounds(30, 310, 140, 30);
+        panelBar.add(barSalirB);
+        
         
         //botones a la escucha
         gestionPrinciB.addActionListener(this);
@@ -195,12 +243,18 @@ public class InterfazCine extends JFrame implements ActionListener {
         salasModificaB.addActionListener(this);
         salasAtualizaListaB.addActionListener(this);
         salasSalirB.addActionListener(this);
+        barAnadeB.addActionListener(this);
+        barEliminaB.addActionListener(this);
+        barModificaB.addActionListener(this);
+        barAtualizaListaB.addActionListener(this);
+        barSalirB.addActionListener(this);
         
         //añadimos paneles a los frames
         this.add(panelPrinci);
         frameGestion.add(panelGestion);
         frameCartelera.add(panelCartelera);
         frameSalas.add(panelSalas);
+        frameBar.add(panelBar);
         
     }
 
@@ -220,6 +274,9 @@ public class InterfazCine extends JFrame implements ActionListener {
         if (e.getSource() == salasSalirB) {
             frameSalas.dispose();
         }
+        if (e.getSource() == barSalirB) {
+            frameBar.dispose();
+        }
         
         //if para hacer visibles los frames
         if (e.getSource() == gestionPrinciB) {
@@ -234,6 +291,10 @@ public class InterfazCine extends JFrame implements ActionListener {
             frameSalas.setVisible(true);
             salasListaArea.setText(gestor.listadoSalas());
         }
+        if (e.getSource() == gestionBarB) {
+            frameBar.setVisible(true);
+            barListaArea.setText(gestor.listadoBar());
+        }
         
         //metodos
         if (e.getSource() == carteleraAtualizaListaB) {
@@ -241,6 +302,9 @@ public class InterfazCine extends JFrame implements ActionListener {
         }
         if (e.getSource() == salasAtualizaListaB) {
             salasListaArea.setText(gestor.listadoSalas());
+        }
+        if (e.getSource() == barAtualizaListaB) {
+            barListaArea.setText(gestor.listadoBar());
         }
     }
 }
