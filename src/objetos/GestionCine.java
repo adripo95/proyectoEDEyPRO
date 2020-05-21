@@ -71,7 +71,7 @@ public class GestionCine {
 
             PreparedStatement sentencia
                     = miConexion.prepareStatement("UPDATE cartelera SET nombre = ?,"
-                            + " genero = ?, sala = ?, precio = ?, hora = ?,"
+                            + " genero = ?, idSala = ?, precio = ?, hora = ?,"
                             + " sinopsis = ? WHERE idPelicula = ? ");
 
             sentencia.setString(1, nombre.trim());

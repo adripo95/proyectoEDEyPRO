@@ -89,6 +89,27 @@ public class InterfazCine extends JFrame implements ActionListener {
     JTextField idPeliculaBorraCarteleraT;
     JButton borraBorraCarteleraB;
     JButton salirBorraCarteleraB;
+    
+    //frame modifica peliculas de la cartelera
+    JFrame frameModificaCartelera;
+    JPanel panelModificaCartelera;
+    JLabel idPeliculaModificaCarteleraL;
+    JTextField idPeliculaModificaCarteleraT;
+    JLabel nombreModificaCarteleraL;
+    JTextField nombreModificaCarteleraT;
+    JLabel generoModificaCarteleraL;
+    JTextField generoModificaCarteleraT;
+    JLabel idSalaModificaCarteleraL;
+    JTextField idSalaModificaCarteleraT;
+    JLabel precioModificaCarteleraL;
+    JTextField precioModificaCarteleraT;
+    JLabel horaModificaCarteleraL;
+    JComboBox horaModificaCarteleraT;
+    JComboBox minutoModificaCarteleraT;
+    JLabel sinopsisModificaCarteleraL;
+    JTextArea sinopsisModificaCarteleraT;
+    JButton modificaModificaCarteleraB;
+    JButton salirModificaCarteleraB;
 
     //contructor de la interfaz
     public InterfazCine() {
@@ -367,6 +388,89 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirBorraCarteleraB.setBounds(200, 150, 100, 30);
         panelBorraCartelera.add(salirBorraCarteleraB);
         
+        //setup frame añadir a cartelera
+        frameModificaCartelera = new JFrame("Modifica Pelicula");
+        frameModificaCartelera.setSize(350, 550);
+        frameModificaCartelera.setResizable(false);
+        frameModificaCartelera.setLocationRelativeTo(null);
+        frameModificaCartelera.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        panelModificaCartelera = new JPanel();
+        panelModificaCartelera.setLayout(null);
+
+        //elementos del frame de añadir a cartelera
+        idPeliculaModificaCarteleraL = new JLabel("ID pelicula: ");
+        idPeliculaModificaCarteleraL.setBounds(20, 20, 100, 30);
+        panelModificaCartelera.add(idPeliculaModificaCarteleraL);
+
+        nombreModificaCarteleraL = new JLabel("Nuevo nombre: ");
+        nombreModificaCarteleraL.setBounds(20, 70, 100, 30);
+        panelModificaCartelera.add(nombreModificaCarteleraL);
+
+        generoModificaCarteleraL = new JLabel("Nuevo Genero: ");
+        generoModificaCarteleraL.setBounds(20, 120, 100, 30);
+        panelModificaCartelera.add(generoModificaCarteleraL);
+
+        idSalaModificaCarteleraL = new JLabel("Nueva sala: ");
+        idSalaModificaCarteleraL.setBounds(20, 170, 100, 30);
+        panelModificaCartelera.add(idSalaModificaCarteleraL);
+
+        precioModificaCarteleraL = new JLabel("Nuevo Precio: ");
+        precioModificaCarteleraL.setBounds(20, 220, 100, 30);
+        panelModificaCartelera.add(precioModificaCarteleraL);
+
+        horaModificaCarteleraL = new JLabel("Nueva Hora: ");
+        horaModificaCarteleraL.setBounds(20, 270, 100, 30);
+        panelModificaCartelera.add(horaModificaCarteleraL);
+
+        sinopsisModificaCarteleraL = new JLabel("Nueva Sinopsis: ");
+        sinopsisModificaCarteleraL.setBounds(20, 320, 100, 30);
+        panelModificaCartelera.add(sinopsisModificaCarteleraL);
+
+        idPeliculaModificaCarteleraT = new JTextField();
+        idPeliculaModificaCarteleraT.setBounds(120, 20, 80, 30);
+        panelModificaCartelera.add(idPeliculaModificaCarteleraT);
+
+        nombreModificaCarteleraT = new JTextField();
+        nombreModificaCarteleraT.setBounds(120, 70, 200, 30);
+        panelModificaCartelera.add(nombreModificaCarteleraT);
+
+        generoModificaCarteleraT = new JTextField();
+        generoModificaCarteleraT.setBounds(120, 120, 150, 30);
+        panelModificaCartelera.add(generoModificaCarteleraT);
+
+        idSalaModificaCarteleraT = new JTextField();
+        idSalaModificaCarteleraT.setBounds(120, 170, 80, 30);
+        panelModificaCartelera.add(idSalaModificaCarteleraT);
+
+        precioModificaCarteleraT = new JTextField();
+        precioModificaCarteleraT.setBounds(120, 220, 100, 30);
+        panelModificaCartelera.add(precioModificaCarteleraT);
+
+        horaModificaCarteleraT = new JComboBox(horas);
+        horaModificaCarteleraT.setSelectedIndex(0);
+        horaModificaCarteleraT.setBounds(120, 270, 50, 30);
+        horaModificaCarteleraT.addActionListener(this);
+        panelModificaCartelera.add(horaModificaCarteleraT);
+
+        minutoModificaCarteleraT = new JComboBox(minutos);
+        minutoModificaCarteleraT.setSelectedIndex(0);
+        minutoModificaCarteleraT.setBounds(180, 270, 50, 30);
+        minutoModificaCarteleraT.addActionListener(this);
+        panelModificaCartelera.add(minutoModificaCarteleraT);
+
+        sinopsisModificaCarteleraT = new JTextArea();
+        sinopsisModificaCarteleraT.setBounds(120, 320, 200, 100);
+        panelModificaCartelera.add(sinopsisModificaCarteleraT);
+
+        //botones frame añadir
+        modificaModificaCarteleraB = new JButton("Añadir");
+        modificaModificaCarteleraB.setBounds(60, 450, 100, 30);
+        panelModificaCartelera.add(modificaModificaCarteleraB);
+
+        salirModificaCarteleraB = new JButton("Salir");
+        salirModificaCarteleraB.setBounds(200, 450, 100, 30);
+        panelModificaCartelera.add(salirModificaCarteleraB);
+        
         //botones a la escucha
         gestionPrinciB.addActionListener(this);
         cajaPrinciB.addActionListener(this);
@@ -394,6 +498,8 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirAnadeCarteleraB.addActionListener(this);
         borraBorraCarteleraB.addActionListener(this);
         salirBorraCarteleraB.addActionListener(this);
+        modificaModificaCarteleraB.addActionListener(this);
+        salirModificaCarteleraB.addActionListener(this);
 
         //añadimos paneles a los frames
         this.add(panelPrinci);
@@ -403,6 +509,7 @@ public class InterfazCine extends JFrame implements ActionListener {
         frameBar.add(panelBar);
         frameAnadeCartelera.add(panelAnadeCartelera);
         frameBorraCartelera.add(panelBorraCartelera);
+        frameModificaCartelera.add(panelModificaCartelera);
 
     }
 
@@ -431,6 +538,9 @@ public class InterfazCine extends JFrame implements ActionListener {
         if (e.getSource() == salirBorraCarteleraB) {
             frameBorraCartelera.dispose();
         }
+        if (e.getSource() == salirModificaCarteleraB) {
+            frameModificaCartelera.dispose();
+        }
 
         //if para hacer visibles los frames
         if (e.getSource() == gestionPrinciB) {
@@ -453,6 +563,9 @@ public class InterfazCine extends JFrame implements ActionListener {
         }
         if (e.getSource() == carteleraEliminaB) {
             frameBorraCartelera.setVisible(true);
+        }
+        if (e.getSource() == carteleraModificaB) {
+            frameModificaCartelera.setVisible(true);
         }
 
         //metodos
@@ -495,6 +608,30 @@ public class InterfazCine extends JFrame implements ActionListener {
             gestor.borraPelicula(idPeliculaBorraC);
             
             idPeliculaBorraCarteleraT.setText("");
+        }
+        if (e.getSource() == modificaModificaCarteleraB) {
+
+            int idPeliculaModC = Integer.valueOf(idPeliculaModificaCarteleraT.getText());
+            String nombreModC = nombreModificaCarteleraT.getText().trim();
+            String generoModC = generoModificaCarteleraT.getText().trim();
+            int idSalaModC = Integer.valueOf(idSalaModificaCarteleraT.getText());
+            double precioModC = Double.valueOf(precioModificaCarteleraT.getText());
+            Time horaModC = Time.valueOf(horas[horaModificaCarteleraT.getSelectedIndex()]
+                    + ":" + minutos[minutoModificaCarteleraT.getSelectedIndex()] + ":00");
+            String sinopsisModC = sinopsisModificaCarteleraT.getText().trim();
+
+            gestor.modificaPelicula(idPeliculaModC, nombreModC, generoModC,
+                    idSalaModC, precioModC, horaModC, sinopsisModC);
+
+            idPeliculaModificaCarteleraT.setText("");
+            nombreModificaCarteleraT.setText("");
+            generoModificaCarteleraT.setText("");
+            idSalaModificaCarteleraT.setText("");
+            precioModificaCarteleraT.setText("");
+            horaModificaCarteleraT.setSelectedIndex(0);
+            minutoModificaCarteleraT.setSelectedIndex(0);
+            sinopsisModificaCarteleraT.setText("");
+
         }
 
     }
