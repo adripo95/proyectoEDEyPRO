@@ -78,9 +78,17 @@ public class InterfazCine extends JFrame implements ActionListener {
     JTextArea sinopsisAnadeCarteleraT;
     JButton anadeAnadeCarteleraB;
     JButton salirAnadeCarteleraB;
-    String[] horas = {"00", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14",
-        "15", "16", "17", "18", "19", "20", "21", "22", "23"};
+    String[] horas = {"00", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+        "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
     String[] minutos = {"00", "10", "20", "30", "40", "50"};
+    
+    //frame borrar peliculas de la cartelera
+    JFrame frameBorraCartelera;
+    JPanel panelBorraCartelera;
+    JLabel idPeliculaBorraCarteleraL;
+    JTextField idPeliculaBorraCarteleraT;
+    JButton borraBorraCarteleraB;
+    JButton salirBorraCarteleraB;
 
     //contructor de la interfaz
     public InterfazCine() {
@@ -331,7 +339,34 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirAnadeCarteleraB = new JButton("Salir");
         salirAnadeCarteleraB.setBounds(200, 450, 100, 30);
         panelAnadeCartelera.add(salirAnadeCarteleraB);
+        
+        //setup frame borrar de la cartelera
+        frameBorraCartelera = new JFrame("Borra Pelicula");
+        frameBorraCartelera.setSize(350, 250);
+        frameBorraCartelera.setResizable(false);
+        frameBorraCartelera.setLocationRelativeTo(null);
+        frameBorraCartelera.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        panelBorraCartelera = new JPanel();
+        panelBorraCartelera.setLayout(null);
+        
+        //componentes frame borrar de la cartelera
+        idPeliculaBorraCarteleraL = new JLabel("ID pelicula: ");
+        idPeliculaBorraCarteleraL.setBounds(20, 20, 100, 30);
+        panelBorraCartelera.add(idPeliculaBorraCarteleraL);
+        
+        idPeliculaBorraCarteleraT = new JTextField();
+        idPeliculaBorraCarteleraT.setBounds(100, 20, 80, 30);
+        panelBorraCartelera.add(idPeliculaBorraCarteleraT);
+        
+        //botones del frame de borrar
+        borraBorraCarteleraB = new JButton("Borrar");
+        borraBorraCarteleraB.setBounds(60, 150, 100, 30);
+        panelBorraCartelera.add(borraBorraCarteleraB);
 
+        salirBorraCarteleraB = new JButton("Salir");
+        salirBorraCarteleraB.setBounds(200, 150, 100, 30);
+        panelBorraCartelera.add(salirBorraCarteleraB);
+        
         //botones a la escucha
         gestionPrinciB.addActionListener(this);
         cajaPrinciB.addActionListener(this);
@@ -357,6 +392,8 @@ public class InterfazCine extends JFrame implements ActionListener {
         barSalirB.addActionListener(this);
         anadeAnadeCarteleraB.addActionListener(this);
         salirAnadeCarteleraB.addActionListener(this);
+        borraBorraCarteleraB.addActionListener(this);
+        salirBorraCarteleraB.addActionListener(this);
 
         //añadimos paneles a los frames
         this.add(panelPrinci);
@@ -365,6 +402,7 @@ public class InterfazCine extends JFrame implements ActionListener {
         frameSalas.add(panelSalas);
         frameBar.add(panelBar);
         frameAnadeCartelera.add(panelAnadeCartelera);
+        frameBorraCartelera.add(panelBorraCartelera);
 
     }
 
@@ -390,12 +428,14 @@ public class InterfazCine extends JFrame implements ActionListener {
         if (e.getSource() == salirAnadeCarteleraB) {
             frameAnadeCartelera.dispose();
         }
+        if (e.getSource() == salirBorraCarteleraB) {
+            frameBorraCartelera.dispose();
+        }
 
         //if para hacer visibles los frames
         if (e.getSource() == gestionPrinciB) {
             frameGestion.setVisible(true);
         }
-
         if (e.getSource() == gestionCartB) {
             frameCartelera.setVisible(true);
             carteleraListaArea.setText(gestor.listadoPeliculas());
@@ -411,6 +451,9 @@ public class InterfazCine extends JFrame implements ActionListener {
         if (e.getSource() == carteleraAnadeB) {
             frameAnadeCartelera.setVisible(true);
         }
+        if (e.getSource() == carteleraEliminaB) {
+            frameBorraCartelera.setVisible(true);
+        }
 
         //metodos
         if (e.getSource() == carteleraAtualizaListaB) {
@@ -423,7 +466,7 @@ public class InterfazCine extends JFrame implements ActionListener {
             barListaArea.setText(gestor.listadoBar());
         }
         if (e.getSource() == anadeAnadeCarteleraB) {
-            
+
             int idPeliculaAnadeC = Integer.valueOf(idPeliculaAnadeCarteleraT.getText());
             String nombreAnadeC = nombreAnadeCarteleraT.getText().trim();
             String generoAnadeC = generoAnadeCarteleraT.getText().trim();
@@ -432,10 +475,10 @@ public class InterfazCine extends JFrame implements ActionListener {
             Time horaAnadeC = Time.valueOf(horas[horaAnadeCarteleraT.getSelectedIndex()]
                     + ":" + minutos[minutoAnadeCarteleraT.getSelectedIndex()] + ":00");
             String sinopsisAnadeC = sinopsisAnadeCarteleraT.getText().trim();
-            
+
             gestor.anadePelicula(idPeliculaAnadeC, nombreAnadeC, generoAnadeC,
                     idSalaAnadeC, precioAnadeC, horaAnadeC, sinopsisAnadeC);
-            
+
             idPeliculaAnadeCarteleraT.setText("");
             nombreAnadeCarteleraT.setText("");
             generoAnadeCarteleraT.setText("");
@@ -444,7 +487,14 @@ public class InterfazCine extends JFrame implements ActionListener {
             horaAnadeCarteleraT.setSelectedIndex(0);
             minutoAnadeCarteleraT.setSelectedIndex(0);
             sinopsisAnadeCarteleraT.setText("");
+
+        }
+        if (e.getSource() == borraBorraCarteleraB) {
+            int idPeliculaBorraC = Integer.valueOf(idPeliculaBorraCarteleraT.getText());
             
+            gestor.borraPelicula(idPeliculaBorraC);
+            
+            idPeliculaBorraCarteleraT.setText("");
         }
 
     }

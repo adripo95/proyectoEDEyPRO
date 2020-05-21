@@ -125,6 +125,7 @@ public class GestionCine {
                 resultado2.next();
 
                 listaPeliculas += "*********************************** \n";
+                listaPeliculas += "ID pelicula: " + resultado.getInt("idPelicula") + "\n";
                 listaPeliculas += "Titulo: " + resultado.getString("nombre") + "\n";
                 listaPeliculas += "Genero: " + resultado.getString("genero") + "\n";
                 listaPeliculas += "Entradas Vendidas: " + resultado.getInt("entradasVendidas") + "\n";
