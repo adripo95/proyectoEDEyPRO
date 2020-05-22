@@ -111,7 +111,7 @@ public class InterfazCine extends JFrame implements ActionListener {
     JButton modificaModificaCarteleraB;
     JButton salirModificaCarteleraB;
     
-    //frame añadir peliculas a cartelera
+    //frame añadir salas
     JFrame frameAnadeSala;
     JPanel panelAnadeSala;
     JLabel idSalaAnadeSalaL;
@@ -133,6 +133,20 @@ public class InterfazCine extends JFrame implements ActionListener {
     JTextField idSalaBorraSalaT;
     JButton borraBorraSalaB;
     JButton salirBorraSalaB;
+    
+    //frame modifica salas
+    JFrame frameModificaSala;
+    JPanel panelModificaSala;
+    JLabel idSalaModificaSalaL;
+    JTextField idSalaModificaSalaT;
+    JLabel aforoModificaSalaL;
+    JTextField aforoModificaSalaT;
+    JLabel tridimensionModificaSalaL;
+    JLabel dolbyAtmosModificaSalaL;
+    JButton modificaModificaSalaB;
+    JButton salirModificaSalaB;
+    JComboBox tridimensionModificaSalaT;
+    JComboBox dolbyAtmosModificaSalaT;
 
     //contructor de la interfaz
     public InterfazCine() {
@@ -576,6 +590,61 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirBorraSalaB.setBounds(200, 150, 100, 30);
         panelBorraSala.add(salirBorraSalaB);
         
+        //setup frame modifica salas
+        frameModificaSala = new JFrame("Modificar Salas");
+        frameModificaSala.setSize(350, 320);
+        frameModificaSala.setResizable(false);
+        frameModificaSala.setLocationRelativeTo(null);
+        frameModificaSala.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        panelModificaSala = new JPanel();
+        panelModificaSala.setLayout(null);
+
+        //elementos del frame de modificar salas
+        idSalaModificaSalaL = new JLabel("ID Sala: ");
+        idSalaModificaSalaL.setBounds(20, 20, 100, 30);
+        panelModificaSala.add(idSalaModificaSalaL);
+
+        aforoModificaSalaL = new JLabel("Nuevo Aforo: ");
+        aforoModificaSalaL.setBounds(20, 70, 100, 30);
+        panelModificaSala.add(aforoModificaSalaL);
+
+        tridimensionModificaSalaL = new JLabel("Nuevo 3D: ");
+        tridimensionModificaSalaL.setBounds(20, 120, 100, 30);
+        panelModificaSala.add(tridimensionModificaSalaL);
+
+        dolbyAtmosModificaSalaL = new JLabel("Nuevo Dolby Atmos: ");
+        dolbyAtmosModificaSalaL.setBounds(20, 170, 150, 30);
+        panelModificaSala.add(dolbyAtmosModificaSalaL);
+
+        idSalaModificaSalaT = new JTextField();
+        idSalaModificaSalaT.setBounds(100, 20, 80, 30);
+        panelModificaSala.add(idSalaModificaSalaT);
+
+        aforoModificaSalaT = new JTextField();
+        aforoModificaSalaT.setBounds(160, 70, 100, 30);
+        panelModificaSala.add(aforoModificaSalaT);
+
+        tridimensionModificaSalaT = new JComboBox(booleanos);
+        tridimensionModificaSalaT.setSelectedIndex(0);
+        tridimensionModificaSalaT.setBounds(160, 120, 80, 30);
+        tridimensionModificaSalaT.addActionListener(this);
+        panelModificaSala.add(tridimensionModificaSalaT);
+
+        dolbyAtmosModificaSalaT = new JComboBox(booleanos);
+        dolbyAtmosModificaSalaT.setSelectedIndex(0);
+        dolbyAtmosModificaSalaT.setBounds(160, 170, 80, 30);
+        dolbyAtmosModificaSalaT.addActionListener(this);
+        panelModificaSala.add(dolbyAtmosModificaSalaT);
+
+        //botones frame modifica salas
+        modificaModificaSalaB = new JButton("Modifica");
+        modificaModificaSalaB.setBounds(60, 230, 100, 30);
+        panelModificaSala.add(modificaModificaSalaB);
+
+        salirModificaSalaB = new JButton("Salir");
+        salirModificaSalaB.setBounds(200, 230, 100, 30);
+        panelModificaSala.add(salirModificaSalaB);
+        
         //botones a la escucha
         gestionPrinciB.addActionListener(this);
         cajaPrinciB.addActionListener(this);
@@ -609,6 +678,8 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirAnadeSalaB.addActionListener(this);
         borraBorraSalaB.addActionListener(this);
         salirBorraSalaB.addActionListener(this);
+        modificaModificaSalaB.addActionListener(this);
+        salirModificaSalaB.addActionListener(this);
 
         //añadimos paneles a los frames
         this.add(panelPrinci);
@@ -621,6 +692,7 @@ public class InterfazCine extends JFrame implements ActionListener {
         frameModificaCartelera.add(panelModificaCartelera);
         frameAnadeSala.add(panelAnadeSala);
         frameBorraSala.add(panelBorraSala);
+        frameModificaSala.add(panelModificaSala);
 
     }
 
@@ -658,6 +730,9 @@ public class InterfazCine extends JFrame implements ActionListener {
         if (e.getSource() == salirBorraSalaB) {
             frameBorraSala.dispose();
         }
+        if (e.getSource() == salirModificaSalaB) {
+            frameModificaSala.dispose();
+        }
 
         //if para hacer visibles los frames
         if (e.getSource() == gestionPrinciB) {
@@ -689,6 +764,9 @@ public class InterfazCine extends JFrame implements ActionListener {
         }
         if (e.getSource() == salasEliminaB) {
             frameBorraSala.setVisible(true);
+        }
+        if (e.getSource() == salasModificaB) {
+            frameModificaSala.setVisible(true);
         }
 
         //metodos
@@ -777,6 +855,21 @@ public class InterfazCine extends JFrame implements ActionListener {
             gestor.borraSala(idSalaBorraS);
             
             idSalaBorraSalaT.setText("");
+        }
+        if (e.getSource() == modificaModificaSalaB) {
+
+            int idSalaAnadeS = Integer.valueOf(idSalaModificaSalaT.getText());
+            int aforoAnadeS = Integer.valueOf(aforoModificaSalaT.getText());
+            boolean trifimensionAnadeS = Boolean.valueOf(booleanos[tridimensionModificaSalaT.getSelectedIndex()]);
+            boolean dolbyAtmosAnadeS = Boolean.valueOf(booleanos[dolbyAtmosModificaSalaT.getSelectedIndex()]);
+            
+            gestor.modificaSala(idSalaAnadeS, aforoAnadeS, trifimensionAnadeS, dolbyAtmosAnadeS);
+
+            idSalaModificaSalaT.setText("");
+            aforoModificaSalaT.setText("");
+            tridimensionModificaSalaT.setSelectedIndex(0);
+            dolbyAtmosModificaSalaT.setSelectedIndex(0);
+
         }
 
     }
