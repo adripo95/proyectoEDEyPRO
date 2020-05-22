@@ -110,6 +110,21 @@ public class InterfazCine extends JFrame implements ActionListener {
     JTextArea sinopsisModificaCarteleraT;
     JButton modificaModificaCarteleraB;
     JButton salirModificaCarteleraB;
+    
+    //frame añadir peliculas a cartelera
+    JFrame frameAnadeSala;
+    JPanel panelAnadeSala;
+    JLabel idSalaAnadeSalaL;
+    JTextField idSalaAnadeSalaT;
+    JLabel aforoAnadeSalaL;
+    JTextField aforoAnadeSalaT;
+    JLabel tridimensionAnadeSalaL;
+    JLabel dolbyAtmosAnadeSalaL;
+    JButton anadeAnadeSalaB;
+    JButton salirAnadeSalaB;
+    JComboBox tridimensionAnadeSalaT;
+    JComboBox dolbyAtmosAnadeSalaT;
+    String[] booleanos = {"false","true"};
 
     //contructor de la interfaz
     public InterfazCine() {
@@ -388,7 +403,7 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirBorraCarteleraB.setBounds(200, 150, 100, 30);
         panelBorraCartelera.add(salirBorraCarteleraB);
         
-        //setup frame añadir a cartelera
+        //setup frame modificar cartelera
         frameModificaCartelera = new JFrame("Modifica Pelicula");
         frameModificaCartelera.setSize(350, 550);
         frameModificaCartelera.setResizable(false);
@@ -397,7 +412,7 @@ public class InterfazCine extends JFrame implements ActionListener {
         panelModificaCartelera = new JPanel();
         panelModificaCartelera.setLayout(null);
 
-        //elementos del frame de añadir a cartelera
+        //elementos del frame modificar la cartelera
         idPeliculaModificaCarteleraL = new JLabel("ID pelicula: ");
         idPeliculaModificaCarteleraL.setBounds(20, 20, 100, 30);
         panelModificaCartelera.add(idPeliculaModificaCarteleraL);
@@ -462,7 +477,7 @@ public class InterfazCine extends JFrame implements ActionListener {
         sinopsisModificaCarteleraT.setBounds(120, 320, 200, 100);
         panelModificaCartelera.add(sinopsisModificaCarteleraT);
 
-        //botones frame añadir
+        //botones frame modificar
         modificaModificaCarteleraB = new JButton("Añadir");
         modificaModificaCarteleraB.setBounds(60, 450, 100, 30);
         panelModificaCartelera.add(modificaModificaCarteleraB);
@@ -470,6 +485,61 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirModificaCarteleraB = new JButton("Salir");
         salirModificaCarteleraB.setBounds(200, 450, 100, 30);
         panelModificaCartelera.add(salirModificaCarteleraB);
+        
+        //setup frame añadir a salas
+        frameAnadeSala = new JFrame("Añadir Salas");
+        frameAnadeSala.setSize(350, 320);
+        frameAnadeSala.setResizable(false);
+        frameAnadeSala.setLocationRelativeTo(null);
+        frameAnadeSala.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        panelAnadeSala = new JPanel();
+        panelAnadeSala.setLayout(null);
+
+        //elementos del frame de añadir a salas
+        idSalaAnadeSalaL = new JLabel("ID Sala: ");
+        idSalaAnadeSalaL.setBounds(20, 20, 100, 30);
+        panelAnadeSala.add(idSalaAnadeSalaL);
+
+        aforoAnadeSalaL = new JLabel("Aforo: ");
+        aforoAnadeSalaL.setBounds(20, 70, 100, 30);
+        panelAnadeSala.add(aforoAnadeSalaL);
+
+        tridimensionAnadeSalaL = new JLabel("3D: ");
+        tridimensionAnadeSalaL.setBounds(20, 120, 100, 30);
+        panelAnadeSala.add(tridimensionAnadeSalaL);
+
+        dolbyAtmosAnadeSalaL = new JLabel("Dolby Atmos: ");
+        dolbyAtmosAnadeSalaL.setBounds(20, 170, 100, 30);
+        panelAnadeSala.add(dolbyAtmosAnadeSalaL);
+
+        idSalaAnadeSalaT = new JTextField();
+        idSalaAnadeSalaT.setBounds(100, 20, 80, 30);
+        panelAnadeSala.add(idSalaAnadeSalaT);
+
+        aforoAnadeSalaT = new JTextField();
+        aforoAnadeSalaT.setBounds(100, 70, 100, 30);
+        panelAnadeSala.add(aforoAnadeSalaT);
+
+        tridimensionAnadeSalaT = new JComboBox(booleanos);
+        tridimensionAnadeSalaT.setSelectedIndex(0);
+        tridimensionAnadeSalaT.setBounds(100, 120, 80, 30);
+        tridimensionAnadeSalaT.addActionListener(this);
+        panelAnadeSala.add(tridimensionAnadeSalaT);
+
+        dolbyAtmosAnadeSalaT = new JComboBox(booleanos);
+        dolbyAtmosAnadeSalaT.setSelectedIndex(0);
+        dolbyAtmosAnadeSalaT.setBounds(100, 170, 80, 30);
+        dolbyAtmosAnadeSalaT.addActionListener(this);
+        panelAnadeSala.add(dolbyAtmosAnadeSalaT);
+
+        //botones frame añadir salas
+        anadeAnadeSalaB = new JButton("Añadir");
+        anadeAnadeSalaB.setBounds(60, 230, 100, 30);
+        panelAnadeSala.add(anadeAnadeSalaB);
+
+        salirAnadeSalaB = new JButton("Salir");
+        salirAnadeSalaB.setBounds(200, 230, 100, 30);
+        panelAnadeSala.add(salirAnadeSalaB);
         
         //botones a la escucha
         gestionPrinciB.addActionListener(this);
@@ -500,6 +570,8 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirBorraCarteleraB.addActionListener(this);
         modificaModificaCarteleraB.addActionListener(this);
         salirModificaCarteleraB.addActionListener(this);
+        anadeAnadeSalaB.addActionListener(this);
+        salirAnadeSalaB.addActionListener(this);
 
         //añadimos paneles a los frames
         this.add(panelPrinci);
@@ -510,6 +582,7 @@ public class InterfazCine extends JFrame implements ActionListener {
         frameAnadeCartelera.add(panelAnadeCartelera);
         frameBorraCartelera.add(panelBorraCartelera);
         frameModificaCartelera.add(panelModificaCartelera);
+        frameAnadeSala.add(panelAnadeSala);
 
     }
 
@@ -541,6 +614,9 @@ public class InterfazCine extends JFrame implements ActionListener {
         if (e.getSource() == salirModificaCarteleraB) {
             frameModificaCartelera.dispose();
         }
+        if (e.getSource() == salirAnadeSalaB) {
+            frameAnadeSala.dispose();
+        }
 
         //if para hacer visibles los frames
         if (e.getSource() == gestionPrinciB) {
@@ -566,6 +642,9 @@ public class InterfazCine extends JFrame implements ActionListener {
         }
         if (e.getSource() == carteleraModificaB) {
             frameModificaCartelera.setVisible(true);
+        }
+        if (e.getSource() == salasAnadeB) {
+            frameAnadeSala.setVisible(true);
         }
 
         //metodos
@@ -631,6 +710,21 @@ public class InterfazCine extends JFrame implements ActionListener {
             horaModificaCarteleraT.setSelectedIndex(0);
             minutoModificaCarteleraT.setSelectedIndex(0);
             sinopsisModificaCarteleraT.setText("");
+
+        }
+        if (e.getSource() == anadeAnadeSalaB) {
+
+            int idSalaAnadeS = Integer.valueOf(idSalaAnadeSalaT.getText());
+            int aforoAnadeS = Integer.valueOf(aforoAnadeSalaT.getText());
+            boolean trifimensionAnadeS = Boolean.valueOf(booleanos[tridimensionAnadeSalaT.getSelectedIndex()]);
+            boolean dolbyAtmosAnadeS = Boolean.valueOf(booleanos[dolbyAtmosAnadeSalaT.getSelectedIndex()]);
+            
+            gestor.anadeSala(idSalaAnadeS, aforoAnadeS, trifimensionAnadeS, dolbyAtmosAnadeS);
+
+            idSalaAnadeSalaT.setText("");
+            aforoAnadeSalaT.setText("");
+            tridimensionAnadeSalaT.setSelectedIndex(0);
+            dolbyAtmosAnadeSalaT.setSelectedIndex(0);
 
         }
 
