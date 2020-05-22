@@ -125,6 +125,14 @@ public class InterfazCine extends JFrame implements ActionListener {
     JComboBox tridimensionAnadeSalaT;
     JComboBox dolbyAtmosAnadeSalaT;
     String[] booleanos = {"false","true"};
+    
+    //frame borrar salas
+    JFrame frameBorraSala;
+    JPanel panelBorraSala;
+    JLabel idSalaBorraSalaL;
+    JTextField idSalaBorraSalaT;
+    JButton borraBorraSalaB;
+    JButton salirBorraSalaB;
 
     //contructor de la interfaz
     public InterfazCine() {
@@ -541,6 +549,33 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirAnadeSalaB.setBounds(200, 230, 100, 30);
         panelAnadeSala.add(salirAnadeSalaB);
         
+        //setup frame borrar de la cartelera
+        frameBorraSala = new JFrame("Borra Sala");
+        frameBorraSala.setSize(350, 250);
+        frameBorraSala.setResizable(false);
+        frameBorraSala.setLocationRelativeTo(null);
+        frameBorraSala.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        panelBorraSala = new JPanel();
+        panelBorraSala.setLayout(null);
+        
+        //componentes frame borrar de la sala
+        idSalaBorraSalaL = new JLabel("ID Sala: ");
+        idSalaBorraSalaL.setBounds(20, 20, 100, 30);
+        panelBorraSala.add(idSalaBorraSalaL);
+        
+        idSalaBorraSalaT = new JTextField();
+        idSalaBorraSalaT.setBounds(100, 20, 80, 30);
+        panelBorraSala.add(idSalaBorraSalaT);
+        
+        //botones del frame de borrar
+        borraBorraSalaB = new JButton("Borrar");
+        borraBorraSalaB.setBounds(60, 150, 100, 30);
+        panelBorraSala.add(borraBorraSalaB);
+
+        salirBorraSalaB = new JButton("Salir");
+        salirBorraSalaB.setBounds(200, 150, 100, 30);
+        panelBorraSala.add(salirBorraSalaB);
+        
         //botones a la escucha
         gestionPrinciB.addActionListener(this);
         cajaPrinciB.addActionListener(this);
@@ -572,6 +607,8 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirModificaCarteleraB.addActionListener(this);
         anadeAnadeSalaB.addActionListener(this);
         salirAnadeSalaB.addActionListener(this);
+        borraBorraSalaB.addActionListener(this);
+        salirBorraSalaB.addActionListener(this);
 
         //añadimos paneles a los frames
         this.add(panelPrinci);
@@ -583,6 +620,7 @@ public class InterfazCine extends JFrame implements ActionListener {
         frameBorraCartelera.add(panelBorraCartelera);
         frameModificaCartelera.add(panelModificaCartelera);
         frameAnadeSala.add(panelAnadeSala);
+        frameBorraSala.add(panelBorraSala);
 
     }
 
@@ -617,6 +655,9 @@ public class InterfazCine extends JFrame implements ActionListener {
         if (e.getSource() == salirAnadeSalaB) {
             frameAnadeSala.dispose();
         }
+        if (e.getSource() == salirBorraSalaB) {
+            frameBorraSala.dispose();
+        }
 
         //if para hacer visibles los frames
         if (e.getSource() == gestionPrinciB) {
@@ -645,6 +686,9 @@ public class InterfazCine extends JFrame implements ActionListener {
         }
         if (e.getSource() == salasAnadeB) {
             frameAnadeSala.setVisible(true);
+        }
+        if (e.getSource() == salasEliminaB) {
+            frameBorraSala.setVisible(true);
         }
 
         //metodos
@@ -726,6 +770,13 @@ public class InterfazCine extends JFrame implements ActionListener {
             tridimensionAnadeSalaT.setSelectedIndex(0);
             dolbyAtmosAnadeSalaT.setSelectedIndex(0);
 
+        }
+        if (e.getSource() == borraBorraSalaB) {
+            int idSalaBorraS = Integer.valueOf(idSalaBorraSalaT.getText());
+            
+            gestor.borraSala(idSalaBorraS);
+            
+            idSalaBorraSalaT.setText("");
         }
 
     }
