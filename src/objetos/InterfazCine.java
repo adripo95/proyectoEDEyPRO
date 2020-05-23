@@ -81,7 +81,7 @@ public class InterfazCine extends JFrame implements ActionListener {
     String[] horas = {"00", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
         "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
     String[] minutos = {"00", "10", "20", "30", "40", "50"};
-    
+
     //frame borrar peliculas de la cartelera
     JFrame frameBorraCartelera;
     JPanel panelBorraCartelera;
@@ -89,7 +89,7 @@ public class InterfazCine extends JFrame implements ActionListener {
     JTextField idPeliculaBorraCarteleraT;
     JButton borraBorraCarteleraB;
     JButton salirBorraCarteleraB;
-    
+
     //frame modifica peliculas de la cartelera
     JFrame frameModificaCartelera;
     JPanel panelModificaCartelera;
@@ -110,7 +110,7 @@ public class InterfazCine extends JFrame implements ActionListener {
     JTextArea sinopsisModificaCarteleraT;
     JButton modificaModificaCarteleraB;
     JButton salirModificaCarteleraB;
-    
+
     //frame añadir salas
     JFrame frameAnadeSala;
     JPanel panelAnadeSala;
@@ -124,8 +124,8 @@ public class InterfazCine extends JFrame implements ActionListener {
     JButton salirAnadeSalaB;
     JComboBox tridimensionAnadeSalaT;
     JComboBox dolbyAtmosAnadeSalaT;
-    String[] booleanos = {"false","true"};
-    
+    String[] booleanos = {"false", "true"};
+
     //frame borrar salas
     JFrame frameBorraSala;
     JPanel panelBorraSala;
@@ -133,7 +133,7 @@ public class InterfazCine extends JFrame implements ActionListener {
     JTextField idSalaBorraSalaT;
     JButton borraBorraSalaB;
     JButton salirBorraSalaB;
-    
+
     //frame modifica salas
     JFrame frameModificaSala;
     JPanel panelModificaSala;
@@ -147,6 +147,20 @@ public class InterfazCine extends JFrame implements ActionListener {
     JButton salirModificaSalaB;
     JComboBox tridimensionModificaSalaT;
     JComboBox dolbyAtmosModificaSalaT;
+
+    //frame añadir a la cafeteria
+    JFrame frameAnadeBar;
+    JPanel panelAnadeBar;
+    JLabel idProductoAnadeBarL;
+    JTextField idProductoAnadeBarT;
+    JLabel nombreAnadeBarL;
+    JTextField nombreAnadeBarT;
+    JLabel stockAnadeBarL;
+    JTextField stockAnadeBarT;
+    JLabel precioAnadeBarL;
+    JTextField precioAnadeBarT;
+    JButton anadeAnadeBarB;
+    JButton salirAnadeBarB;
 
     //contructor de la interfaz
     public InterfazCine() {
@@ -397,7 +411,7 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirAnadeCarteleraB = new JButton("Salir");
         salirAnadeCarteleraB.setBounds(200, 450, 100, 30);
         panelAnadeCartelera.add(salirAnadeCarteleraB);
-        
+
         //setup frame borrar de la cartelera
         frameBorraCartelera = new JFrame("Borra Pelicula");
         frameBorraCartelera.setSize(350, 250);
@@ -406,16 +420,16 @@ public class InterfazCine extends JFrame implements ActionListener {
         frameBorraCartelera.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         panelBorraCartelera = new JPanel();
         panelBorraCartelera.setLayout(null);
-        
+
         //componentes frame borrar de la cartelera
         idPeliculaBorraCarteleraL = new JLabel("ID pelicula: ");
         idPeliculaBorraCarteleraL.setBounds(20, 20, 100, 30);
         panelBorraCartelera.add(idPeliculaBorraCarteleraL);
-        
+
         idPeliculaBorraCarteleraT = new JTextField();
         idPeliculaBorraCarteleraT.setBounds(100, 20, 80, 30);
         panelBorraCartelera.add(idPeliculaBorraCarteleraT);
-        
+
         //botones del frame de borrar
         borraBorraCarteleraB = new JButton("Borrar");
         borraBorraCarteleraB.setBounds(60, 150, 100, 30);
@@ -424,7 +438,7 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirBorraCarteleraB = new JButton("Salir");
         salirBorraCarteleraB.setBounds(200, 150, 100, 30);
         panelBorraCartelera.add(salirBorraCarteleraB);
-        
+
         //setup frame modificar cartelera
         frameModificaCartelera = new JFrame("Modifica Pelicula");
         frameModificaCartelera.setSize(350, 550);
@@ -507,7 +521,7 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirModificaCarteleraB = new JButton("Salir");
         salirModificaCarteleraB.setBounds(200, 450, 100, 30);
         panelModificaCartelera.add(salirModificaCarteleraB);
-        
+
         //setup frame añadir a salas
         frameAnadeSala = new JFrame("Añadir Salas");
         frameAnadeSala.setSize(350, 320);
@@ -562,7 +576,7 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirAnadeSalaB = new JButton("Salir");
         salirAnadeSalaB.setBounds(200, 230, 100, 30);
         panelAnadeSala.add(salirAnadeSalaB);
-        
+
         //setup frame borrar de la cartelera
         frameBorraSala = new JFrame("Borra Sala");
         frameBorraSala.setSize(350, 250);
@@ -571,16 +585,16 @@ public class InterfazCine extends JFrame implements ActionListener {
         frameBorraSala.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         panelBorraSala = new JPanel();
         panelBorraSala.setLayout(null);
-        
+
         //componentes frame borrar de la sala
         idSalaBorraSalaL = new JLabel("ID Sala: ");
         idSalaBorraSalaL.setBounds(20, 20, 100, 30);
         panelBorraSala.add(idSalaBorraSalaL);
-        
+
         idSalaBorraSalaT = new JTextField();
         idSalaBorraSalaT.setBounds(100, 20, 80, 30);
         panelBorraSala.add(idSalaBorraSalaT);
-        
+
         //botones del frame de borrar
         borraBorraSalaB = new JButton("Borrar");
         borraBorraSalaB.setBounds(60, 150, 100, 30);
@@ -589,7 +603,7 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirBorraSalaB = new JButton("Salir");
         salirBorraSalaB.setBounds(200, 150, 100, 30);
         panelBorraSala.add(salirBorraSalaB);
-        
+
         //setup frame modifica salas
         frameModificaSala = new JFrame("Modificar Salas");
         frameModificaSala.setSize(350, 320);
@@ -645,6 +659,57 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirModificaSalaB.setBounds(200, 230, 100, 30);
         panelModificaSala.add(salirModificaSalaB);
         
+        //setup frame añadir a salas
+        frameAnadeBar = new JFrame("Añadir Prod. Cafeteria");
+        frameAnadeBar.setSize(350, 320);
+        frameAnadeBar.setResizable(false);
+        frameAnadeBar.setLocationRelativeTo(null);
+        frameAnadeBar.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        panelAnadeBar = new JPanel();
+        panelAnadeBar.setLayout(null);
+
+        //elementos del frame de añadir a salas
+        idProductoAnadeBarL = new JLabel("ID Prod: ");
+        idProductoAnadeBarL.setBounds(20, 20, 100, 30);
+        panelAnadeBar.add(idProductoAnadeBarL);
+
+        nombreAnadeBarL = new JLabel("Nombre: ");
+        nombreAnadeBarL.setBounds(20, 70, 100, 30);
+        panelAnadeBar.add(nombreAnadeBarL);
+
+        stockAnadeBarL = new JLabel("stock: ");
+        stockAnadeBarL.setBounds(20, 120, 100, 30);
+        panelAnadeBar.add(stockAnadeBarL);
+
+        precioAnadeBarL = new JLabel("Precio: ");
+        precioAnadeBarL.setBounds(20, 170, 100, 30);
+        panelAnadeBar.add(precioAnadeBarL);
+
+        idProductoAnadeBarT = new JTextField();
+        idProductoAnadeBarT.setBounds(100, 20, 80, 30);
+        panelAnadeBar.add(idProductoAnadeBarT);
+
+        nombreAnadeBarT = new JTextField();
+        nombreAnadeBarT.setBounds(100, 70, 100, 30);
+        panelAnadeBar.add(nombreAnadeBarT);
+
+        stockAnadeBarT = new JTextField();
+        stockAnadeBarT.setBounds(100, 120, 100, 30);
+        panelAnadeBar.add(stockAnadeBarT);
+
+        precioAnadeBarT = new JTextField();
+        precioAnadeBarT.setBounds(100, 170, 100, 30);
+        panelAnadeBar.add(precioAnadeBarT);
+
+        //botones frame añadir salas
+        anadeAnadeBarB = new JButton("Añadir");
+        anadeAnadeBarB.setBounds(60, 230, 100, 30);
+        panelAnadeBar.add(anadeAnadeBarB);
+
+        salirAnadeBarB = new JButton("Salir");
+        salirAnadeBarB.setBounds(200, 230, 100, 30);
+        panelAnadeBar.add(salirAnadeBarB);
+
         //botones a la escucha
         gestionPrinciB.addActionListener(this);
         cajaPrinciB.addActionListener(this);
@@ -680,6 +745,8 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirBorraSalaB.addActionListener(this);
         modificaModificaSalaB.addActionListener(this);
         salirModificaSalaB.addActionListener(this);
+        anadeAnadeBarB.addActionListener(this);
+        salirAnadeBarB.addActionListener(this);
 
         //añadimos paneles a los frames
         this.add(panelPrinci);
@@ -693,6 +760,7 @@ public class InterfazCine extends JFrame implements ActionListener {
         frameAnadeSala.add(panelAnadeSala);
         frameBorraSala.add(panelBorraSala);
         frameModificaSala.add(panelModificaSala);
+        frameAnadeBar.add(panelAnadeBar);
 
     }
 
@@ -733,6 +801,9 @@ public class InterfazCine extends JFrame implements ActionListener {
         if (e.getSource() == salirModificaSalaB) {
             frameModificaSala.dispose();
         }
+        if (e.getSource() == salirAnadeBarB) {
+            frameAnadeBar.dispose();
+        }
 
         //if para hacer visibles los frames
         if (e.getSource() == gestionPrinciB) {
@@ -767,6 +838,9 @@ public class InterfazCine extends JFrame implements ActionListener {
         }
         if (e.getSource() == salasModificaB) {
             frameModificaSala.setVisible(true);
+        }
+        if (e.getSource() == barAnadeB) {
+            frameAnadeBar.setVisible(true);
         }
 
         //metodos
@@ -805,9 +879,9 @@ public class InterfazCine extends JFrame implements ActionListener {
         }
         if (e.getSource() == borraBorraCarteleraB) {
             int idPeliculaBorraC = Integer.valueOf(idPeliculaBorraCarteleraT.getText());
-            
+
             gestor.borraPelicula(idPeliculaBorraC);
-            
+
             idPeliculaBorraCarteleraT.setText("");
         }
         if (e.getSource() == modificaModificaCarteleraB) {
@@ -840,7 +914,7 @@ public class InterfazCine extends JFrame implements ActionListener {
             int aforoAnadeS = Integer.valueOf(aforoAnadeSalaT.getText());
             boolean trifimensionAnadeS = Boolean.valueOf(booleanos[tridimensionAnadeSalaT.getSelectedIndex()]);
             boolean dolbyAtmosAnadeS = Boolean.valueOf(booleanos[dolbyAtmosAnadeSalaT.getSelectedIndex()]);
-            
+
             gestor.anadeSala(idSalaAnadeS, aforoAnadeS, trifimensionAnadeS, dolbyAtmosAnadeS);
 
             idSalaAnadeSalaT.setText("");
@@ -851,9 +925,9 @@ public class InterfazCine extends JFrame implements ActionListener {
         }
         if (e.getSource() == borraBorraSalaB) {
             int idSalaBorraS = Integer.valueOf(idSalaBorraSalaT.getText());
-            
+
             gestor.borraSala(idSalaBorraS);
-            
+
             idSalaBorraSalaT.setText("");
         }
         if (e.getSource() == modificaModificaSalaB) {
@@ -862,13 +936,28 @@ public class InterfazCine extends JFrame implements ActionListener {
             int aforoAnadeS = Integer.valueOf(aforoModificaSalaT.getText());
             boolean trifimensionAnadeS = Boolean.valueOf(booleanos[tridimensionModificaSalaT.getSelectedIndex()]);
             boolean dolbyAtmosAnadeS = Boolean.valueOf(booleanos[dolbyAtmosModificaSalaT.getSelectedIndex()]);
-            
+
             gestor.modificaSala(idSalaAnadeS, aforoAnadeS, trifimensionAnadeS, dolbyAtmosAnadeS);
 
             idSalaModificaSalaT.setText("");
             aforoModificaSalaT.setText("");
             tridimensionModificaSalaT.setSelectedIndex(0);
             dolbyAtmosModificaSalaT.setSelectedIndex(0);
+
+        }
+        if (e.getSource() == anadeAnadeBarB) {
+
+            int idBarAnadeB = Integer.valueOf(idProductoAnadeBarT.getText());
+            String nombreAnadeB = nombreAnadeBarT.getText().trim();
+            int stockAnadeB = Integer.valueOf(stockAnadeBarT.getText());
+            double precioAnadeB = Double.valueOf(precioAnadeBarT.getText());
+
+            gestor.anadeBar(idBarAnadeB, nombreAnadeB, stockAnadeB, precioAnadeB);
+
+            idProductoAnadeBarT.setText("");
+            nombreAnadeBarT.setText("");
+            stockAnadeBarT.setText("");
+            precioAnadeBarT.setText("");
 
         }
 
