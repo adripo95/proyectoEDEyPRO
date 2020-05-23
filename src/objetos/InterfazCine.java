@@ -161,6 +161,14 @@ public class InterfazCine extends JFrame implements ActionListener {
     JTextField precioAnadeBarT;
     JButton anadeAnadeBarB;
     JButton salirAnadeBarB;
+    
+    //frame borrar del bar
+    JFrame frameBorraBar;
+    JPanel panelBorraBar;
+    JLabel idProductoBorraBarL;
+    JTextField idProductoBorraBarT;
+    JButton borraBorraBarB;
+    JButton salirBorraBarB;
 
     //contructor de la interfaz
     public InterfazCine() {
@@ -577,7 +585,7 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirAnadeSalaB.setBounds(200, 230, 100, 30);
         panelAnadeSala.add(salirAnadeSalaB);
 
-        //setup frame borrar de la cartelera
+        //setup frame borrar de la sala
         frameBorraSala = new JFrame("Borra Sala");
         frameBorraSala.setSize(350, 250);
         frameBorraSala.setResizable(false);
@@ -659,7 +667,7 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirModificaSalaB.setBounds(200, 230, 100, 30);
         panelModificaSala.add(salirModificaSalaB);
         
-        //setup frame añadir a salas
+        //setup frame añadir a Bar
         frameAnadeBar = new JFrame("Añadir Prod. Cafeteria");
         frameAnadeBar.setSize(350, 320);
         frameAnadeBar.setResizable(false);
@@ -668,7 +676,7 @@ public class InterfazCine extends JFrame implements ActionListener {
         panelAnadeBar = new JPanel();
         panelAnadeBar.setLayout(null);
 
-        //elementos del frame de añadir a salas
+        //elementos del frame de añadir a Bar
         idProductoAnadeBarL = new JLabel("ID Prod: ");
         idProductoAnadeBarL.setBounds(20, 20, 100, 30);
         panelAnadeBar.add(idProductoAnadeBarL);
@@ -701,7 +709,7 @@ public class InterfazCine extends JFrame implements ActionListener {
         precioAnadeBarT.setBounds(100, 170, 100, 30);
         panelAnadeBar.add(precioAnadeBarT);
 
-        //botones frame añadir salas
+        //botones frame añadir Bar
         anadeAnadeBarB = new JButton("Añadir");
         anadeAnadeBarB.setBounds(60, 230, 100, 30);
         panelAnadeBar.add(anadeAnadeBarB);
@@ -709,6 +717,33 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirAnadeBarB = new JButton("Salir");
         salirAnadeBarB.setBounds(200, 230, 100, 30);
         panelAnadeBar.add(salirAnadeBarB);
+        
+        //setup frame borrar del bar
+        frameBorraBar = new JFrame("Borra del Bar");
+        frameBorraBar.setSize(350, 250);
+        frameBorraBar.setResizable(false);
+        frameBorraBar.setLocationRelativeTo(null);
+        frameBorraBar.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        panelBorraBar = new JPanel();
+        panelBorraBar.setLayout(null);
+
+        //componentes frame borrar de la sala
+        idProductoBorraBarL = new JLabel("ID Producto: ");
+        idProductoBorraBarL.setBounds(20, 20, 100, 30);
+        panelBorraBar.add(idProductoBorraBarL);
+
+        idProductoBorraBarT = new JTextField();
+        idProductoBorraBarT.setBounds(100, 20, 80, 30);
+        panelBorraBar.add(idProductoBorraBarT);
+
+        //botones del frame de borrar
+        borraBorraBarB = new JButton("Borrar");
+        borraBorraBarB.setBounds(60, 150, 100, 30);
+        panelBorraBar.add(borraBorraBarB);
+
+        salirBorraBarB = new JButton("Salir");
+        salirBorraBarB.setBounds(200, 150, 100, 30);
+        panelBorraBar.add(salirBorraBarB);
 
         //botones a la escucha
         gestionPrinciB.addActionListener(this);
@@ -747,6 +782,8 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirModificaSalaB.addActionListener(this);
         anadeAnadeBarB.addActionListener(this);
         salirAnadeBarB.addActionListener(this);
+        borraBorraBarB.addActionListener(this);
+        salirBorraBarB.addActionListener(this);
 
         //añadimos paneles a los frames
         this.add(panelPrinci);
@@ -761,6 +798,7 @@ public class InterfazCine extends JFrame implements ActionListener {
         frameBorraSala.add(panelBorraSala);
         frameModificaSala.add(panelModificaSala);
         frameAnadeBar.add(panelAnadeBar);
+        frameBorraBar.add(panelBorraBar);
 
     }
 
@@ -804,6 +842,9 @@ public class InterfazCine extends JFrame implements ActionListener {
         if (e.getSource() == salirAnadeBarB) {
             frameAnadeBar.dispose();
         }
+        if (e.getSource() == salirBorraBarB) {
+            frameBorraBar.dispose();
+        }
 
         //if para hacer visibles los frames
         if (e.getSource() == gestionPrinciB) {
@@ -841,6 +882,9 @@ public class InterfazCine extends JFrame implements ActionListener {
         }
         if (e.getSource() == barAnadeB) {
             frameAnadeBar.setVisible(true);
+        }
+        if (e.getSource() == barEliminaB) {
+            frameBorraBar.setVisible(true);
         }
 
         //metodos
@@ -959,6 +1003,13 @@ public class InterfazCine extends JFrame implements ActionListener {
             stockAnadeBarT.setText("");
             precioAnadeBarT.setText("");
 
+        }
+        if (e.getSource() == borraBorraBarB) {
+            int idProductoBorraB = Integer.valueOf(idProductoBorraBarT.getText());
+
+            gestor.borraBar(idProductoBorraB);
+
+            idProductoBorraBarT.setText("");
         }
 
     }
