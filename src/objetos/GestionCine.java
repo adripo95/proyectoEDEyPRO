@@ -362,7 +362,7 @@ public class GestionCine {
 
             PreparedStatement sentencia
                     = miConexion.prepareStatement("UPDATE cafeteria SET nombre = ?,"
-                            + " stock = ?, precio = ? WHERE iProducto = ? ");
+                            + " stock = ?, precio = ? WHERE idProducto = ? ");
 
             sentencia.setString(1, nombre);
             sentencia.setInt(2, stock);

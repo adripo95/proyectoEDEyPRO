@@ -169,6 +169,20 @@ public class InterfazCine extends JFrame implements ActionListener {
     JTextField idProductoBorraBarT;
     JButton borraBorraBarB;
     JButton salirBorraBarB;
+    
+    //frame modificar de la cafeteria
+    JFrame frameModificaBar;
+    JPanel panelModificaBar;
+    JLabel idProductoModificaBarL;
+    JTextField idProductoModificaBarT;
+    JLabel nombreModificaBarL;
+    JTextField nombreModificaBarT;
+    JLabel stockModificaBarL;
+    JTextField stockModificaBarT;
+    JLabel precioModificaBarL;
+    JTextField precioModificaBarT;
+    JButton modificaModificaBarB;
+    JButton salirModificaBarB;
 
     //contructor de la interfaz
     public InterfazCine() {
@@ -744,6 +758,57 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirBorraBarB = new JButton("Salir");
         salirBorraBarB.setBounds(200, 150, 100, 30);
         panelBorraBar.add(salirBorraBarB);
+        
+        //setup frame modifica Bar
+        frameModificaBar = new JFrame("Modifica Prod. Cafeteria");
+        frameModificaBar.setSize(350, 320);
+        frameModificaBar.setResizable(false);
+        frameModificaBar.setLocationRelativeTo(null);
+        frameModificaBar.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        panelModificaBar = new JPanel();
+        panelModificaBar.setLayout(null);
+
+        //elementos del frame de añadir a Bar
+        idProductoModificaBarL = new JLabel("ID Prod: ");
+        idProductoModificaBarL.setBounds(20, 20, 100, 30);
+        panelModificaBar.add(idProductoModificaBarL);
+
+        nombreModificaBarL = new JLabel("Nuevo Nombre: ");
+        nombreModificaBarL.setBounds(20, 70, 120, 30);
+        panelModificaBar.add(nombreModificaBarL);
+
+        stockModificaBarL = new JLabel("Nuevo stock: ");
+        stockModificaBarL.setBounds(20, 120, 120, 30);
+        panelModificaBar.add(stockModificaBarL);
+
+        precioModificaBarL = new JLabel("Nuevo Precio: ");
+        precioModificaBarL.setBounds(20, 170, 120, 30);
+        panelModificaBar.add(precioModificaBarL);
+
+        idProductoModificaBarT = new JTextField();
+        idProductoModificaBarT.setBounds(160, 20, 80, 30);
+        panelModificaBar.add(idProductoModificaBarT);
+
+        nombreModificaBarT = new JTextField();
+        nombreModificaBarT.setBounds(160, 70, 100, 30);
+        panelModificaBar.add(nombreModificaBarT);
+
+        stockModificaBarT = new JTextField();
+        stockModificaBarT.setBounds(160, 120, 100, 30);
+        panelModificaBar.add(stockModificaBarT);
+
+        precioModificaBarT = new JTextField();
+        precioModificaBarT.setBounds(160, 170, 100, 30);
+        panelModificaBar.add(precioModificaBarT);
+
+        //botones frame añadir Bar
+        modificaModificaBarB = new JButton("Modificar");
+        modificaModificaBarB.setBounds(60, 230, 100, 30);
+        panelModificaBar.add(modificaModificaBarB);
+
+        salirModificaBarB = new JButton("Salir");
+        salirModificaBarB.setBounds(200, 230, 100, 30);
+        panelModificaBar.add(salirModificaBarB);
 
         //botones a la escucha
         gestionPrinciB.addActionListener(this);
@@ -784,6 +849,8 @@ public class InterfazCine extends JFrame implements ActionListener {
         salirAnadeBarB.addActionListener(this);
         borraBorraBarB.addActionListener(this);
         salirBorraBarB.addActionListener(this);
+        modificaModificaBarB.addActionListener(this);
+        salirModificaBarB.addActionListener(this);
 
         //añadimos paneles a los frames
         this.add(panelPrinci);
@@ -799,6 +866,7 @@ public class InterfazCine extends JFrame implements ActionListener {
         frameModificaSala.add(panelModificaSala);
         frameAnadeBar.add(panelAnadeBar);
         frameBorraBar.add(panelBorraBar);
+        frameModificaBar.add(panelModificaBar);
 
     }
 
@@ -845,6 +913,9 @@ public class InterfazCine extends JFrame implements ActionListener {
         if (e.getSource() == salirBorraBarB) {
             frameBorraBar.dispose();
         }
+        if (e.getSource() == salirModificaBarB) {
+            frameModificaBar.dispose();
+        }
 
         //if para hacer visibles los frames
         if (e.getSource() == gestionPrinciB) {
@@ -885,6 +956,9 @@ public class InterfazCine extends JFrame implements ActionListener {
         }
         if (e.getSource() == barEliminaB) {
             frameBorraBar.setVisible(true);
+        }
+        if (e.getSource() == barModificaB) {
+            frameModificaBar.setVisible(true);
         }
 
         //metodos
@@ -1010,6 +1084,21 @@ public class InterfazCine extends JFrame implements ActionListener {
             gestor.borraBar(idProductoBorraB);
 
             idProductoBorraBarT.setText("");
+        }
+        if (e.getSource() == modificaModificaBarB) {
+
+            int idBarModificaB = Integer.valueOf(idProductoModificaBarT.getText());
+            String nombreModificaB = nombreModificaBarT.getText().trim();
+            int stockModificaB = Integer.valueOf(stockModificaBarT.getText());
+            double precioModificaB = Double.valueOf(precioModificaBarT.getText());
+
+            gestor.modificaBar(idBarModificaB, nombreModificaB, stockModificaB, precioModificaB);
+
+            idProductoModificaBarT.setText("");
+            nombreModificaBarT.setText("");
+            stockModificaBarT.setText("");
+            precioModificaBarT.setText("");
+
         }
 
     }
